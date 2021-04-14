@@ -1,0 +1,17 @@
+// kill the server
+sudo lsof -i :8080
+
+kill -9 {PID}
+
+// run server
+swift run
+
+// show routes 
+swift run Run routes
+
+// expose local server 
+(install)
+npm install -g localtunnel
+
+(start tunnel)
+lt --port 8080
