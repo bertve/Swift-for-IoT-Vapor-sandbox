@@ -24,6 +24,11 @@ public struct GPIOController: RouteCollection {
                 decr.get(use: decrementDisplay)
             }
         }
+
+        gpio.group("temperature") { temp in
+            temp.get(use: getTempRep)
+        }
+
     }
     
     func toggleLight(req: Request) -> String {
@@ -54,5 +59,25 @@ public struct GPIOController: RouteCollection {
         } else {
             return "FAIL: displaying number"
         }
+    }
+
+    func getTempRep(req: Request) -> String {
+        var objT: String = "No object temp available"
+        var ambT: String = "No ambient temp available"
+
+        if let oT = service.objectTemp {
+            objT = String(oT)
+        }
+
+        if let aT = service.ambientTemp {
+            ambT = String(aT)
+        }
+
+        return """
+        -------------TEMPERATURES-------------
+        object temp: \(objT)C°
+        ambient temp: \(ambT)C°
+        --------------------------------------
+        """
     }
 }

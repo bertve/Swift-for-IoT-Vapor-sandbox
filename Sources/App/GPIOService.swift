@@ -2,15 +2,28 @@ import SwiftyGPIO
 import Foundation
 
 final class GPIOService {
+
     class var sharedInstance: GPIOService {
         struct Singleton {
             static let instance = GPIOService()
         }
         return Singleton.instance
     }
+
     private let gpios: [GPIOName: GPIO] = SwiftyGPIO.GPIOs(for: .RaspberryPi4)
+    private let i2cs = SwiftyGPIO.hardwareI2Cs(for: .RaspberryPi4)!
+
     private var LED: GPIO?
-    private var digitDisplay : DigitDisplay?
+    private var digitDisplay: DigitDisplay?
+    private var mlx90614: MLX90614?
+
+    var objectTemp: Double? {
+        return mlx90614?.objectTemp
+    }
+
+    var ambientTemp: Double? {
+        return mlx90614?.ambientTemp
+    }
 
     func setup(){
 
@@ -34,12 +47,12 @@ final class GPIOService {
             fatalError("Could not init target 14 gpio")
         }
         digitDisplayGPIO.append(gpioOne)
-        guard let gpioTwo = gpios[.P2] else {
-            fatalError("Could not init target 2 gpio")
+        guard let gpioTwo = gpios[.P16] else {
+            fatalError("Could not init target 16 gpio")
         }
         digitDisplayGPIO.append(gpioTwo)
-        guard let gpioThree = gpios[.P3] else {
-            fatalError("Could not init target 3 gpio")
+        guard let gpioThree = gpios[.P17] else {
+            fatalError("Could not init target 17 gpio")
         }
         digitDisplayGPIO.append(gpioThree)
         guard let gpioFour = gpios[.P4] else {
@@ -93,6 +106,9 @@ final class GPIOService {
                 }
             }
         }
+
+        // setup XML90416
+        mlx90614 = MLX90614(i2c: i2cs[1])
 
     }
 
