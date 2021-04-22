@@ -1,0 +1,54 @@
+// postman rest client (success)
+[ INFO ] POST /gpio/light [request-id: 0F29FD0D-1149-4AC8-A39A-A560BD256715]
+{
+    "toggleOn": true
+}
+[("Host", "swift4iot.eu.ngrok.io"), ("User-Agent", "PostmanRuntime/7.26.8"), ("Content-Length", "26"), ("Accept", "*/*"), ("Accept-Encoding", "gzip, deflate, br"), ("Cache-Control", "no-cache"), ("Content-Type", "application/json"), ("Postman-Token", "58a03473-d6e4-4f17-8a88-8256296ee7b1"), ("X-Forwarded-For", "78.22.205.46"), ("X-Forwarded-Proto", "https")]
+[ INFO ] POST /gpio/light [request-id: 6FDF9594-CB9D-427D-A1F4-B6C0FA69E1D0]
+{
+    "toggleOn": false
+}
+[("Host", "swift4iot.eu.ngrok.io"), ("User-Agent", "PostmanRuntime/7.26.8"), ("Content-Length", "27"), ("Accept", "*/*"), ("Accept-Encoding", "gzip, deflate, br"), ("Cache-Control", "no-cache"), ("Content-Type", "application/json"), ("Postman-Token", "d535f848-76e3-4b19-a1da-1812a39e6ce4"), ("X-Forwarded-For", "78.22.205.46"), ("X-Forwarded-Proto", "https")]
+[ INFO ] POST /gpio/display [request-id: 74B3D755-1531-4B54-8F87-CD95874B7BBB]
+{
+    "number": 6667
+}
+[("Host", "swift4iot.eu.ngrok.io"), ("User-Agent", "PostmanRuntime/7.26.8"), ("Content-Length", "24"), ("Accept", "*/*"), ("Accept-Encoding", "gzip, deflate, br"), ("Cache-Control", "no-cache"), ("Content-Type", "application/json"), ("Postman-Token", "98f7732e-0018-46ae-8252-cd0c49eeb8cc"), ("X-Forwarded-For", "78.22.205.46"), ("X-Forwarded-Proto", "https")]
+setted display number: 6667
+numstr: 6667
+display seq: [[1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0], [1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1], [1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1], [0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1]]
+
+// IOS APP (failure: can't decode json)
+[ INFO ] POST /gpio/light [request-id: 14FD72C0-ABB6-4313-83C5-706A949E5C50]
+{"toggleOn":true}
+[("Host", "swift4iot.eu.ngrok.io"), ("User-Agent", "gpiocontrollerapp"), ("Content-Length", "17"), ("Accept", "*/*"), ("Accept-Encoding", "gzip, deflate, br"), ("Accept-Language", "en-us"), ("Content-Type", "Application/json"), ("X-Forwarded-For", "2a02:1812:1137:c600:883f:e929:ed5d:cb01"), ("X-Forwarded-Proto", "https")]
+[ INFO ] POST /gpio/light [request-id: 8B4FC14F-F9EE-463D-89FC-9E45CB7EEA2C]
+{"toggleOn":false}
+[("Host", "swift4iot.eu.ngrok.io"), ("User-Agent", "gpiocontrollerapp"), ("Content-Length", "18"), ("Accept", "*/*"), ("Accept-Encoding", "gzip, deflate, br"), ("Accept-Language", "en-us"), ("Content-Type", "Application/json"), ("X-Forwarded-For", "2a02:1812:1137:c600:883f:e929:ed5d:cb01"), ("X-Forwarded-Proto", "https")]
+[ INFO ] POST /gpio/display [request-id: 46F2D438-9EF3-4FDA-B3B1-F3D55E19BAAA]
+{"number":1}
+[("Host", "swift4iot.eu.ngrok.io"), ("User-Agent", "sandboxApp/1 CFNetwork/1220.1 Darwin/20.3.0"), ("Content-Length", "12"), ("Accept", "*/*"), ("Accept-Encoding", "gzip, deflate, br"), ("Accept-Language", "en-us"), ("Content-Type", "Application/json"), ("X-Forwarded-For", "2a02:1812:1137:c600:883f:e929:ed5d:cb01"), ("X-Forwarded-Proto", "https")]
+[ INFO ] GET /gpio/temperature [request-id: 1F3C66EF-3EF1-4E65-8676-B9FEE1C9F5C8]
+
+
+// when not using Vapor Content (success)
+[ INFO ] POST /gpio/display [request-id: 49E15A98-7BC6-4FBB-A08F-F34C226EBB62]
+{
+    "number": 6667
+}
+[("Host", "swift4iot.eu.ngrok.io"), ("User-Agent", "PostmanRuntime/7.26.8"), ("Content-Length", "24"), ("Accept", "*/*"), ("Accept-Encoding", "gzip, deflate, br"), ("Cache-Control", "no-cache"), ("Content-Type", "application/json"), ("Postman-Token", "75c19078-87fa-46c2-96b5-c9e0df224f66"), ("X-Forwarded-For", "78.22.205.46"), ("X-Forwarded-Proto", "https")]
+setted display number: 6667
+numstr: 6667
+display seq: [[1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0], [1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1], [1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1], [0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1]]
+[ INFO ] POST /gpio/display [request-id: B6E4C062-6808-4115-9C09-695E2F033984]
+{"number":2}
+[("Host", "swift4iot.eu.ngrok.io"), ("User-Agent", "sandboxApp/1 CFNetwork/1220.1 Darwin/20.3.0"), ("Content-Length", "12"), ("Accept", "*/*"), ("Accept-Encoding", "gzip, deflate, br"), ("Accept-Language", "en-us"), ("Content-Type", "Application/json"), ("X-Forwarded-For", "2a02:1812:1137:c600:883f:e929:ed5d:cb01"), ("X-Forwarded-Proto", "https")]
+setted display number: 2
+numstr: 0002
+display seq: [[1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0], [1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1], [1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1], [1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1]]
+[ INFO ] POST /gpio/light [request-id: C74A3319-59BB-4668-B345-D5BCE77A284B]
+{"toggleOn":true}
+[("Host", "swift4iot.eu.ngrok.io"), ("User-Agent", "gpiocontrollerapp"), ("Content-Length", "17"), ("Accept", "*/*"), ("Accept-Encoding", "gzip, deflate, br"), ("Accept-Language", "en-us"), ("Content-Type", "Application/json"), ("X-Forwarded-For", "2a02:1812:1137:c600:883f:e929:ed5d:cb01"), ("X-Forwarded-Proto", "https")]
+[ INFO ] POST /gpio/light [request-id: A2A6E9BA-B9BE-4E34-9735-58DDFF6D4904]
+{"toggleOn":false}
+[("Host", "swift4iot.eu.ngrok.io"), ("User-Agent", "gpiocontrollerapp"), ("Content-Length", "18"), ("Accept", "*/*"), ("Accept-Encoding", "gzip, deflate, br"), ("Accept-Language", "en-us"), ("Content-Type", "Application/json"), ("X-Forwarded-For", "2a02:1812:1137:c600:883f:e929:ed5d:cb01"), ("X-Forwarded-Proto", "https")]

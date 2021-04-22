@@ -1,7 +1,10 @@
 import Vapor
+import Foundation
 
 public struct GPIOController: RouteCollection {
     let service = GPIOService.sharedInstance
+
+    let decoder = JSONDecoder()
 
     public func boot(routes: RoutesBuilder) throws {
 
@@ -31,13 +34,18 @@ public struct GPIOController: RouteCollection {
 
     }
     
-    func toggleLight(req: Request) -> String {
-        if let toggleLightReq : ToggleLightRequest = try? req.content.decode(ToggleLightRequest.self) {
+    func toggleLight(req: Request) -> MessageResponse {
+        print(req.body.string ?? "no body")
+        print(req.headers)
+        if let bodyString = req.body.string,
+            let bodyData = bodyString.data(using: .utf8),
+            let toggleLightReq = try? decoder.decode(LightRequest.self, from: bodyData) {
+            
             let state : LightState = toggleLightReq.toggleOn ? .onn : .off
             service.toggleLight(state)
-            return "toggled light \(state.rawValue)"
+            return MessageResponse(message:"toggled light \(state.rawValue)")
         } else {
-            return "FAIL: toggling light failed"
+            return MessageResponse(message:"FAIL: toggling light failed")
         }
     }
 
@@ -51,17 +59,27 @@ public struct GPIOController: RouteCollection {
         return "display decremented"
     }
 
-    func displayNumber(req: Request) -> String {
-        if let displayReq : DisplayRequest = try? req.content.decode(DisplayRequest.self) {
-            let number: Int = displayReq.number
-            service.display(number)
-            return "displayed \(number)"
+    func displayNumber(req: Request) -> MessageResponse {
+        print(req.body.string ?? "no body")
+        print(req.headers)
+        if let bodyString = req.body.string,
+            let bodyData = bodyString.data(using: .utf8),
+            let displayReq : DisplayNumberRequest = try? decoder.decode(DisplayNumberRequest.self, from: bodyData ){
+
+            let number = displayReq.number
+            if number >= 0 && number <= 9999 {
+                service.display(number)
+                return MessageResponse(message:"displayed \(number)")
+            } else {
+                return MessageResponse(message: "can't display \(number), display range [0,9999]")
+            } 
+
         } else {
-            return "FAIL: displaying number"
+            return MessageResponse(message:"FAIL: displaying")
         }
     }
 
-    func getTempRep(req: Request) -> String {
+    func getTempRep(req: Request) -> MessageResponse {
         var objT: String = "No object temp available"
         var ambT: String = "No ambient temp available"
 
@@ -73,11 +91,11 @@ public struct GPIOController: RouteCollection {
             ambT = String(aT)
         }
 
-        return """
+        return MessageResponse(message:"""
         -------------TEMPERATURES-------------
         object temp: \(objT)C°
         ambient temp: \(ambT)C°
         --------------------------------------
-        """
+        """)
     }
 }

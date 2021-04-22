@@ -1,20 +1,25 @@
 // kill the server
+(check)
 sudo lsof -i :8080
 
-kill -9 {PID}
+(kill)
+sudo kill -9 {PID}
 
 // run server
-swift run
+(sudo) swift run
 
 // show routes 
 swift run Run routes
 
 // expose local server 
-(install)
-npm install -g localtunnel
 
-(start tunnel)
-lt --port 8080
+    // local tunnel
+    (install)
+    npm install -g localtunnel
 
-//get ip
-hostname -I
+    (start tunnel)
+    lt --port 8080 --subdomain bertvebpswiftforiot
+
+    //ngrok (pro)
+    (start tunnel static domain)
+    ngrok http -region=eu -hostname=swift4iot.eu.ngrok.io 8080
