@@ -91,11 +91,6 @@ public struct GPIOController: RouteCollection {
             ambT = String(aT)
         }
 
-        return MessageResponse(message:"""
-        -------------TEMPERATURES-------------
-        object temp: \(objT)C°
-        ambient temp: \(ambT)C°
-        --------------------------------------
-        """)
+        return MessageResponse(message:"object temp: \(objT)C°\nambient temp: \(ambT)C°")
     }
 }

@@ -10,9 +10,10 @@ final class GPIOService {
         return Singleton.instance
     }
 
+    private let mqttService = MQTTService()
+
     private let gpios: [GPIOName: GPIO] = SwiftyGPIO.GPIOs(for: .RaspberryPi4)
     private let i2cs = SwiftyGPIO.hardwareI2Cs(for: .RaspberryPi4)!
-
     private var LED: GPIO?
     private var digitDisplay: DigitDisplay?
     private var mlx90614: MLX90614?
@@ -109,6 +110,19 @@ final class GPIOService {
 
         // setup XML90416
         mlx90614 = MLX90614(i2c: i2cs[1])
+
+        Thread.detachNewThread {
+            while true {
+                if let oT = self.objectTemp,
+                    let aT = self.ambientTemp {
+                    let tempData = TempData(ambientTemp: aT, objectTemp: oT)
+                    print("publishing...")
+                    print(tempData)
+                    self.mqttService.publish(to:"temperature",with: tempData)
+                    sleep(1)
+                }
+            }
+        }
 
     }
 
